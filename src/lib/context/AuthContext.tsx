@@ -27,18 +27,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthChange(async (user) => {
-      setFirebaseUser(user);
-      if (user) {
-        const data = await getUserData(user.uid);
-        setUserData(data);
-      } else {
-        setUserData(null);
-      }
-      setLoading(false);
-    });
+    try {
+      const unsubscribe = onAuthChange(async (user) => {
+        setFirebaseUser(user);
+        if (user) {
+          const data = await getUserData(user.uid);
+          setUserData(data);
+        } else {
+          setUserData(null);
+        }
+        setLoading(false);
+      });
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    } catch {
+      setLoading(false);
+      return () => {};
+    }
   }, []);
 
   const isAdmin = userData?.role === 'admin';

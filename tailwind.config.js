@@ -24,8 +24,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Oswald', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Oswald', 'Impact', 'sans-serif'],
       },
       animation: {
         'glow-pulse': 'glowPulse 2s ease-in-out infinite',

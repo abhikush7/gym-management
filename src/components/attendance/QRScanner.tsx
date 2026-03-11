@@ -13,7 +13,7 @@ interface QRData {
 
 export default function QRScanner() {
   const [scanning, setScanning] = useState(false);
-  const scannerRef = useRef<{ clear: () => Promise<void> } | null>(null);
+  const scannerRef = useRef<{ clear: () => void | Promise<void> } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const startScanner = async () => {
@@ -56,7 +56,10 @@ export default function QRScanner() {
   useEffect(() => {
     return () => {
       if (scannerRef.current) {
-        scannerRef.current.clear().catch(() => {});
+        const result = scannerRef.current.clear();
+        if (result && typeof (result as Promise<void>).catch === 'function') {
+          (result as Promise<void>).catch(() => {});
+        }
       }
     };
   }, []);

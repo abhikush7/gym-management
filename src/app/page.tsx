@@ -1,11 +1,13 @@
-import dynamic from 'next/dynamic';
+import lazyLoad from 'next/dynamic';
 import Link from 'next/link';
 import PricingCard from '@/components/cards/PricingCard';
 import ContactForm from '@/components/forms/ContactForm';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
-const HeroCanvas = dynamic(() => import('@/components/three/HeroCanvas'), { ssr: false });
+export const revalidate = 0;
+
+const HeroCanvas = lazyLoad(() => import('@/components/three/HeroCanvas'), { ssr: false });
 
 const defaultPlans = [
   {
