@@ -56,10 +56,7 @@ export default function QRScanner() {
   useEffect(() => {
     return () => {
       if (scannerRef.current) {
-        const result = scannerRef.current.clear();
-        if (result && typeof (result as Promise<void>).catch === 'function') {
-          (result as Promise<void>).catch(() => {});
-        }
+        Promise.resolve(scannerRef.current.clear()).catch(() => {});
       }
     };
   }, []);

@@ -3,14 +3,14 @@
 export const dynamic = 'force-dynamic';
 
 import { useState, useEffect } from 'react';
-import lazyLoad from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { attendanceService } from '@/lib/services/attendanceService';
 import { Attendance } from '@/lib/types';
 import Loader from '@/components/ui/Loader';
 import { formatDateTime } from '@/lib/utils/helpers';
 
-const QRGenerator = lazyLoad(() => import('@/components/attendance/QRGenerator'), { ssr: false });
+const QRGenerator = dynamicImport(() => import('@/components/attendance/QRGenerator'), { ssr: false });
 
 export default function ClientAttendancePage() {
   const { userData } = useAuth();

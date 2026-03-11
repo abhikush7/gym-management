@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import { useState } from 'react';
-import lazyLoad from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import toast from 'react-hot-toast';
 import { useTodayAttendance } from '@/lib/hooks/useAttendance';
 import { attendanceService } from '@/lib/services/attendanceService';
@@ -15,7 +15,7 @@ import Modal from '@/components/ui/Modal';
 import Loader from '@/components/ui/Loader';
 import { formatDateTime } from '@/lib/utils/helpers';
 
-const QRScanner = lazyLoad(() => import('@/components/attendance/QRScanner'), { ssr: false });
+const QRScanner = dynamicImport(() => import('@/components/attendance/QRScanner'), { ssr: false });
 
 export default function AttendancePage() {
   const { attendance, loading, refetch } = useTodayAttendance();

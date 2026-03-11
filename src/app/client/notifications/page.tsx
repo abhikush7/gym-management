@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { notificationService } from '@/lib/services/notificationService';
@@ -17,14 +17,14 @@ export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const load = async () => {
+  const load = useCallback(async () => {
     if (!userData?.uid) return;
     const data = await notificationService.getByUser(userData.uid);
     setNotifications(data);
     setLoading(false);
-  };
+  }, [userData?.uid]);
 
-  useEffect(() => { load(); }, [userData?.uid]);
+  useEffect(() => { load(); }, [load]);
 
   const handleMarkRead = async (id: string) => {
     await notificationService.markAsRead(id);

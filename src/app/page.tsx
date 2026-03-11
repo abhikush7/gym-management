@@ -1,4 +1,4 @@
-import lazyLoad from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import Link from 'next/link';
 import PricingCard from '@/components/cards/PricingCard';
 import ContactForm from '@/components/forms/ContactForm';
@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer';
 
 export const revalidate = 0;
 
-const HeroCanvas = lazyLoad(() => import('@/components/three/HeroCanvas'), { ssr: false });
+const HeroCanvas = dynamicImport(() => import('@/components/three/HeroCanvas'), { ssr: false });
 
 const defaultPlans = [
   {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   collection,
   query,
@@ -22,9 +22,10 @@ export function useFirestoreCollection<T>(
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const constraintsRef = useRef(constraints);
 
   useEffect(() => {
-    const q = query(collection(db, collectionName), ...constraints);
+    const q = query(collection(db, collectionName), ...constraintsRef.current);
     const unsubscribe = onSnapshot(
       q,
       (snap) => {
@@ -38,7 +39,6 @@ export function useFirestoreCollection<T>(
     );
 
     return () => unsubscribe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionName]);
 
   return { data, loading, error };
