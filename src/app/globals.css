@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #000000;
+  --color-accent-red: #ef4444;
+  --color-accent-blue: #00d4ff;
+  --color-neon-blue: #00d4ff;
+  --color-dark-surface: #0a0a0a;
+  --color-dark-card: #111111;
+  --color-dark-border: #1f1f1f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+@layer components {
+  .card-dark {
+    @apply bg-[#111111] border border-[#1f1f1f] rounded-xl p-6;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-lg transition-all;
+  }
+
+  .btn-secondary {
+    @apply border border-[#00d4ff] text-[#00d4ff] hover:bg-[#00d4ff]/10 bg-transparent font-semibold rounded-lg transition-all;
+  }
+
+  .input-dark {
+    @apply w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#00d4ff] focus:ring-2 focus:ring-[#00d4ff]/20 transition-all;
+  }
+
+  .gradient-dark {
+    background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  }
+}
+
+.neon-blue {
+  text-shadow: 0 0 10px #00d4ff, 0 0 40px #00d4ff;
+}
+
+.neon-red {
+  text-shadow: 0 0 10px #ef4444, 0 0 40px #ef4444;
+}
+
+.glow-border-blue {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.glow-border-red {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
